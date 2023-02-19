@@ -1,5 +1,9 @@
 let numeroTirada = 0;
+let generalaJugador1 = 0;
+let generalaJugador2 = 0;
 let jugada = [0,0,0,0,0];
+const TOTAL_JUGADAS = 22;
+let contadorJugadas = 0;
 const caraDados = [
     {
         valor: 1,
@@ -46,20 +50,23 @@ function dado(numeroDado, id, valor, estado,) {
     this.id = id;
     this.valor = valor;
     this.estado = estado;
-}
+};
 
 function actualizarValor(dado) {
     if (dado.estado === 0) {
         dado.valor = Math.floor(Math.random() * 6) + 1;
     }
-}
+};
+
 function lanzarDados() {
 
+    activarCeldas();
     actualizarValor(dado1);
     actualizarValor(dado2);
     actualizarValor(dado3);
     actualizarValor(dado4);
     actualizarValor(dado5);
+
 
     [dado1, dado2, dado3, dado4, dado5].forEach(dado => {
         if (dado.estado === 0) {
@@ -83,7 +90,7 @@ function lanzarDados() {
     miBoton.classList.add("boton-deshabilitado");
     miBoton.classList.remove("boton-activo");
     } 
-}
+};
 
 function seleccionarDado(dados) {
     if (dados.estado === 0) {
@@ -102,17 +109,17 @@ function seleccionarDado(dados) {
             break;
         }
     }
-}
+};
 
 function cargarImagenes(valor, id){
     let imag = document.getElementById(id);
     imag.src = caraDados[valor - 1].url;
-}
+};
 
 function cargarImagenesInvertidas(valor, id){
     let imag = document.getElementById(id);
     imag.src = caraDados[valor - 1].urlInv;
-}
+};
 
 function ordenarDados() {
     jugada[0] = dado1.valor;
@@ -123,16 +130,17 @@ function ordenarDados() {
     jugada.sort(function(a, b) {
         return a - b;
       });
-}
+};
 
 function comprobarEscalera() {
+    ordenarDados();
     for (let i = 0; i < jugada.length - 1; i++) {
-      if (jugada[i+1] - jugada[i] !== 1 || jugada[i] === jugada[i+1]) {
+      if (jugada[i+1] - jugada[i] != 1 || jugada[i] === jugada[i+1]) {
         return false;
       }
     }
     return true;
-  }
+  };
 
 function comprobarFull() {
     ordenarDados();
@@ -143,47 +151,135 @@ function comprobarFull() {
     return false;
   }
 
-function comprobarPoker() {
+  function comprobarPoker() {
     ordenarDados();
-    if ((jugada[0] == jugada[1] == jugada[2] == jugada[3]) || (jugada[1] == jugada[2] == jugada[3] == jugada[4])) {
+    if ((jugada[0] == jugada[1] && jugada[1] == jugada[2] && jugada[2] == jugada[3]) || 
+        (jugada[1] == jugada[2] && jugada[2] == jugada[3] && jugada[3] == jugada[4])) {
         return true;
-  }
-  return false;
+    }
+    return false;
 }
 
 function comprobarGenerala() {
     ordenarDados();
-    return ( jugada[0] == jugada[1] == jugada[2] == jugada[3] == jugada[4]);
+    return (jugada[0] == jugada[1] && jugada[1] == jugada[2] && jugada[2] == jugada[3] && jugada[3] == jugada[4]);
 }
 
+function numeros(numero, id) {
+    let puntaje = 0;
+    ordenarDados();
+    for (let i = 0; i < 5; i++) {
+        if (jugada[i] === numero) {
+            puntaje = puntaje + numero;
+        }
+    }
+    cargarPuntaje(puntaje, id);
+    desactivarBotonesJugador(turnoJugador);
+    (turnoJugador === 1) ? turnoJugador = 2 : turnoJugador = 1;
+    resetValues();
+    aumentarContadorJugadas();
+};
 
+function escalera(id) {
+    let escalera = comprobarEscalera();
+    let puntaje = 0;
+    if (escalera && numeroTirada == 1) {
+        puntaje = 25;
+     } else if (escalera) {
+         puntaje = 20;
+     }; 
+    cargarPuntaje(puntaje, id);
+    desactivarBotonesJugador(turnoJugador);
+     (turnoJugador === 1) ? turnoJugador = 2 : turnoJugador = 1;
+     resetValues();
+     aumentarContadorJugadas();
+};
 
-function full() {
-    
+function full(id) {
     let full = comprobarFull();
     let puntaje = 0;   
-    let celda1 = document.getElementById("fullj1");
-    let celda2 = document.getElementById("fullj2");
-
     if (full && numeroTirada == 1) {
        puntaje = 35;
     } else if (full) {
         puntaje = 30;
     }; 
-  
-    if (turnoJugador === 1) {
-        puntajeJugador1 = puntajeJugador1 + puntaje;
-        celda1.innerHTML = puntaje;
-        celda1.onclick = null;
-    } else {
-        puntajeJugador2 = puntajeJugador2 + puntaje;
-        celda2.innerHTML = puntaje;
-        celda2.onclick = null;
-    }
+    cargarPuntaje(puntaje, id);
+    desactivarBotonesJugador(turnoJugador);
+    (turnoJugador === 1) ? turnoJugador = 2 : turnoJugador = 1;
+    resetValues();
+    aumentarContadorJugadas();
+};
+
+function poker(id) {
+    let poker = comprobarPoker();
+    let puntaje = 0;   
+    if (poker && numeroTirada == 1) {
+       puntaje = 45;
+    } else if (poker) {
+        puntaje = 40;
+    }; 
+    cargarPuntaje(puntaje, id);
+    desactivarBotonesJugador(turnoJugador);
+    (turnoJugador === 1) ? turnoJugador = 2 : turnoJugador = 1;
+    resetValues();
+    aumentarContadorJugadas();
+};
+
+function generala(id) {
+    let generala = comprobarGenerala();
+    let puntaje = 0;   
+    if (generala && numeroTirada == 1) {
+       puntaje = 55;
+    } else if (generala) {
+        puntaje = 50;
+    }; 
+    cargarPuntaje(puntaje, id);
+    desactivarBotonesJugador(turnoJugador);
+
+    if (generala && turnoJugador == 1) {
+        generalaJuhador1 = 1;
+    } else if (generala && turnoJugador == 2) {
+        generalaJugador2 = 1;
+    };
 
     (turnoJugador === 1) ? turnoJugador = 2 : turnoJugador = 1;
     resetValues();
-}
+    aumentarContadorJugadas();
+};
+
+function generalaDoble(id) {
+    let generala = comprobarGenerala();
+    let puntaje = 0;   
+    if (generala && turnoJugador == 1 && generalaJugador1 == 1) {
+       puntaje = 100;
+    } else if (generala && turnoJugador == 2 && generalaJugador2 == 1) {
+        puntaje = 100;
+    };
+    if (generala && numeroTirada == 1) {
+        puntaje  = puntaje + 5;
+    } 
+
+    cargarPuntaje(puntaje, id);
+    desactivarBotonesJugador(turnoJugador);
+    (turnoJugador === 1) ? turnoJugador = 2 : turnoJugador = 1;
+    resetValues();
+    aumentarContadorJugadas();
+};
+
+function cargarPuntaje(puntaje, id) {
+    let celda = document.getElementById(id);
+    if (turnoJugador === 1) {
+        puntajeJugador1 = puntajeJugador1 + puntaje;
+        let celdaTotal = document.getElementById("pj1");
+        celdaTotal.innerHTML = puntajeJugador1;
+    } else {
+        puntajeJugador2 = puntajeJugador2 + puntaje;
+        let celdaTotal = document.getElementById("pj2");
+        celdaTotal.innerHTML = puntajeJugador2;
+    }
+    celda.innerHTML = puntaje;
+    celda.onclick = null;
+};
 
 function resetValues() {
     let miBoton = document.getElementById("lanzar");
@@ -196,5 +292,48 @@ function resetValues() {
     dado3.estado = 0;
     dado4.estado = 0;
     dado5.estado = 0;
+};
+
+function activarCeldas() {
+    let celdasJugador;
+    if (turnoJugador === 1) {
+      celdasJugador = document.querySelectorAll('.celda-jugador-1');
+    } else {
+      celdasJugador = document.querySelectorAll('.celda-jugador-2');
+    }
+  
+    celdasJugador.forEach(function(celda) {
+      if (celda.innerHTML === '-') {
+        celda.classList.remove('celda-deshabilitada');
+      }
+    });
+};
+
+function desactivarBotonesJugador(jugador) {
+    let celdas = document.querySelectorAll(`#jugador${jugador} td`);
+    celdas.forEach(celda => {
+        celda.classList.add('celda-deshabilitada');
+    });
+};
+
+function aumentarContadorJugadas() {
+  contadorJugadas++;
+  if (contadorJugadas === TOTAL_JUGADAS) {
+    determinarGanador();
+  }
+;}
+
+function determinarGanador() {
+    if (puntajeJugador1 > puntajeJugador2) {
+        alert("Ha ganado el jugador 1 con " + puntajeJugador1 + " puntos");
+    } else if(puntajeJugador2 > puntajeJugador1) {
+        alert("Ha ganado el juhador 2 con " + puntajeJugador2 + " puntos");
+    };
+    
+    if(puntajeJugador1 == puntajeJugador2) {
+        alert("Hay un empate");
+    }
+    location.reload();
 }
 
+  

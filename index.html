@@ -37,37 +37,36 @@
         <th>Generala Doble</th>
         <th>Total</th>
       </tr>
-      <tr>
-        <td>Jugador 1</td>
-        <td id = "1j1" onclick="numeroUno()"> </td>
-        <td id = "2j1" onclick="numeroDos()"></td>
-        <td id = "4j1" onclick="numeroCuatro()"></td>
-        <td id = "5j1" onclick="numeroCinco()"></td>
-        <td id = "6j1" onclick="numeroSeis()"></td>
-        <td id ="escaleraj1" onclick="escalera()"></td>
-        <td id = "3j1" onclick="numeroTres()"></td>
-        <td id="fullj1" onclick="full()"></td>
-        <td id = "pokerj1" onclick="poker()"></td>
-        <td id = "generalaj1" onclick="generala()"></td>
-        <td id = "generaladlj1" onclick="generalaDoble()"></td>
-        <td></td>
+      <tr id="jugador1">
+        <td class="jugadores">Jugador 1</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id = "1j1" onclick="numeros(1, '1j1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id = "2j1" onclick="numeros(2, '2j1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id = "3j1" onclick="numeros(3, '3j1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id = "4j1" onclick="numeros(4, '4j1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id = "5j1" onclick="numeros(5, '5j1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id = "6j1" onclick="numeros(6, '6j1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id ="escaleraj1" onclick="escalera('escaleraj1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id="fullj1" onclick="full('fullj1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id = "pokerj1" onclick="poker('pokerj1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id = "generalaj1" onclick="generala('generalaj1')">-</td>
+        <td class="celda-jugador-1 celda-deshabilitada" id = "generaladlj1" onclick="generalaDoble('generaladlj1')">-</td>
+        <td id = "pj1" class="total"></td>
       </tr>
-      <tr>
-        <td>Jugador 2</td>
-        <td id = "1j2" onclick="numeroUno()"> </td>
-        <td id = "2j2" onclick="numeroDos()"></td>
-        <td id = "3j2" onclick="numeroTres()"></td>
-        <td id = "4j2" onclick="numeroCuatro()"></td>
-        <td id = "5j2" onclick="numeroCinco()"></td>
-        <td id = "6j2" onclick="numeroSeis()"></td>
-        <td id ="escaleraj2" onclick="escalera()"></td>
-        <td id="fullj2" onclick="full()"></td>
-        <td id = "pokerj2" onclick="poker()"></td>
-        <td id = "generalaj2" onclick="generala()"></td>
-        <td id = "generaladlj2" onclick="generalaDoble()"></td>
-        <td></td>
+      <tr id="jugador2">
+        <td class="jugadores">Jugador 2</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id = "1j2" onclick="numeros(1, '1j2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id = "2j2" onclick="numeros(2, '2j2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id = "3j2" onclick="numeros(3, '3j2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id = "4j2" onclick="numeros(4, '4j2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id = "5j2" onclick="numeros(5, '5j2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id = "6j2" onclick="numeros(6, '6j2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id ="escaleraj2" onclick="escalera('escaleraj2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id="fullj2" onclick="full('fullj2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id = "pokerj2" onclick="poker('pokerj2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id = "generalaj2" onclick="generala('generalaj2')">-</td>
+        <td class="celda-jugador-2 celda-deshabilitada" id = "generaladlj2" onclick="generalaDoble('generaladlj2')">-</td>
+        <td id="pj2" class="total"></td>
       </tr>
-      <!-- Añade más filas si necesitas más jugadores -->
     </table>
     <div class="dados">
       <img onclick="seleccionarDado(dado1)" id="dadoImg1">
