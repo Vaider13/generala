@@ -33,12 +33,12 @@ tr:nth-child(even) {
   background-color: #F2F2F2;
 }
 
-tr:hover {
+td:hover {
   background-color: #DDD;
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #af4c82;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -47,10 +47,26 @@ button {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  cursor: pointer;
 }
 
 button:hover {
-  background-color: #3E8E41;
+  background-color: #982162;
 }
+
+.boton-activo {
+  background-color: #af4c82;
+  color: white;
+  cursor: pointer;
+}
+
+.boton-deshabilitado {
+  background-color: #CCCCCC;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.numtirada {
+  font-size: medium;
+}
+
 

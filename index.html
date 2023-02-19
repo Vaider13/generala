@@ -35,33 +35,36 @@
         <th>Poker</th>
         <th>Generala</th>
         <th>Generala Doble</th>
+        <th>Total</th>
       </tr>
       <tr>
         <td>Jugador 1</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td id = "1j1" onclick="numeroUno()"> </td>
+        <td id = "2j1" onclick="numeroDos()"></td>
+        <td id = "4j1" onclick="numeroCuatro()"></td>
+        <td id = "5j1" onclick="numeroCinco()"></td>
+        <td id = "6j1" onclick="numeroSeis()"></td>
+        <td id ="escaleraj1" onclick="escalera()"></td>
+        <td id = "3j1" onclick="numeroTres()"></td>
+        <td id="fullj1" onclick="full()"></td>
+        <td id = "pokerj1" onclick="poker()"></td>
+        <td id = "generalaj1" onclick="generala()"></td>
+        <td id = "generaladlj1" onclick="generalaDoble()"></td>
         <td></td>
       </tr>
       <tr>
         <td>Jugador 2</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td id = "1j2" onclick="numeroUno()"> </td>
+        <td id = "2j2" onclick="numeroDos()"></td>
+        <td id = "3j2" onclick="numeroTres()"></td>
+        <td id = "4j2" onclick="numeroCuatro()"></td>
+        <td id = "5j2" onclick="numeroCinco()"></td>
+        <td id = "6j2" onclick="numeroSeis()"></td>
+        <td id ="escaleraj2" onclick="escalera()"></td>
+        <td id="fullj2" onclick="full()"></td>
+        <td id = "pokerj2" onclick="poker()"></td>
+        <td id = "generalaj2" onclick="generala()"></td>
+        <td id = "generaladlj2" onclick="generalaDoble()"></td>
         <td></td>
       </tr>
       <!-- Añade más filas si necesitas más jugadores -->
@@ -74,7 +77,11 @@
       <img onclick="seleccionarDado(dado5)" id="dadoImg5">
     </div>
     <div class="boton">
-      <button onclick="lanzarDados()">Lanzar dados</button>
+      <button id="lanzar" class="boton-activo" onclick="lanzarDados()">Lanzar dados</button> 
+      <div class="tir">
+        <p id = "numtirada"></p>
+      </div>
+     
     </div>
   </body>
 </html>
